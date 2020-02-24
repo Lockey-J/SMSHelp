@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SMSHelp
+{
+    interface ISMSInterface
+    {
+        /// <summary>
+        /// 登录Cookie
+        /// </summary>
+        string Token { get; set; }
+        /// <summary>
+        /// 错误消息
+        /// </summary>
+        string ErrMsg { get; set; }
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="password">密码</param>
+        /// <returns></returns>
+        bool Login(string username, string password);
+
+        /// <summary>
+        /// 查询用户余额
+        /// </summary>
+        /// <returns></returns>
+        bool GetUserBalance(out List<string> ResultInfo);
+
+        /// <summary>
+        /// 获取手机号码
+        /// </summary>
+        /// <param name="id">项目ID</param>
+        /// <param name="ISP">运营商</param>
+        /// <param name="area">地区</param>
+        /// <param name="card">虚拟：1或实卡：2</param>
+        /// <param name="phone">指定手机号</param>
+        /// <param name="loop">过滤已做过号码 过滤：1 不过滤：2</param>
+        /// <returns>返回手机号码</returns>
+        string GetPhone(string id, string ISP, string area, int card, string phone = null, int loop = 1);
+
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        /// <param name="id">项目Id</param>
+        /// <param name="phone">手机号码</param>
+        /// <param name="author">作者ID</param>
+        /// <returns>短信内容</returns>
+        string GetPhoneMsg(string id, string phone, string author);
+
+        /// <summary>
+        /// 发送短信
+        /// </summary>
+        /// <param name="id">项目Id</param>
+        /// <param name="phone">手机号码</param>
+        /// <param name="sendPhone">发送号码</param>
+        /// <param name="content">发送内容</param>
+        /// <returns>是否成功</returns>
+        bool SendMsg(string id, string phone, string sendPhone, string content);
+
+        /// <summary>
+        /// 加黑手机号码
+        /// </summary>
+        /// <param name="id">项目Id</param>
+        /// <param name="phone">手机号码</param>
+        /// <returns>是否成功</returns>
+        bool AddBlackPhone(string id, string phone);
+
+        /// <summary>
+        /// 释放手机号
+        /// </summary>
+        /// <param name="id">项目Id</param>
+        /// <param name="phone">手机号码</param>
+        /// <returns>是否成功</returns>
+        bool FreePhone(string id, string phone);
+    }
+}
