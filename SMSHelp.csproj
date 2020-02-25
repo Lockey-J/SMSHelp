@@ -81,15 +81,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SMSBase\SMSBase.csproj">
-      <Project>{61eb3d41-f5d0-4ab2-99ba-6202b980a35a}</Project>
-      <Name>SMSBase</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="System.Data.SQLite">
       <Version>1.0.112</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="SMSBase\SMSBase.csproj">
+      <Project>{61EB3D41-F5D0-4AB2-99BA-6202B980A35A}</Project>
+      <Name>SMSBase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
