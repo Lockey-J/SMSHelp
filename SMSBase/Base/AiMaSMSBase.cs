@@ -37,6 +37,10 @@ namespace SMSBase.Base
         /// 错误消息
         /// </summary>
         public string ErrMsg { get; set; }
+        /// <summary>
+        /// 开发者账号
+        /// </summary>
+        public string Developer { get; set; }
 
         /// <summary>
         /// 加黑手机号码
@@ -174,7 +178,7 @@ namespace SMSBase.Base
         /// <param name="phone">手机号码</param>
         /// <param name="author">作者ID</param>
         /// <returns>短信内容</returns>
-        public bool GetPhoneMsg(string id, string phone, out string Result, string author = "")
+        public bool GetPhoneMsg(string id, string phone, out string Result)
         {
             if (string.IsNullOrWhiteSpace(id)||string.IsNullOrWhiteSpace(phone))
             {
@@ -183,7 +187,7 @@ namespace SMSBase.Base
                 return false;
             }
 
-            mHttpItem.URL = ApiHost + $"/api/yh_qm/id={id}&phone={phone}&t={author}&token={Token}";
+            mHttpItem.URL = ApiHost + $"/api/yh_qm/id={id}&phone={phone}&t={Developer}&token={Token}";
 
             List<string> ResultHtml = Http.GetHtml(mHttpItem).Html.Split('|').ToList();
             try

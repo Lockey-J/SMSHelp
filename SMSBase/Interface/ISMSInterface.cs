@@ -16,6 +16,8 @@ namespace SMSBase.Interface
         /// 错误消息
         /// </summary>
         string ErrMsg { get; set; }
+
+        string Developer { get; set; }
         /// <summary>
         /// 登录
         /// </summary>
@@ -46,10 +48,9 @@ namespace SMSBase.Interface
         /// 获取验证码
         /// </summary>
         /// <param name="id">项目Id</param>
-        /// <param name="phone">手机号码</param>
-        /// <param name="author">作者ID</param>
+        /// <param name="phone">手机号码</param>      
         /// <returns>短信内容</returns>
-        bool GetPhoneMsg(string id, string phone, out string Result, string author="");
+        bool GetPhoneMsg(string id, string phone, out string Result);
 
         /// <summary>
         /// 发送短信
