@@ -136,30 +136,32 @@ namespace SMSBase.Base
         /// <param name="phone">指定手机号</param>
         /// <param name="loop">过滤已做过号码 过滤：1 不过滤：2</param>
         /// <returns>返回手机号码</returns>
-        public bool GetPhone(string id, out string Result, string ISP = "0", string area = "0", int card = 0, string phone = null, int loop = 1)
+        public bool GetPhone(string id, out List<string> Result, string ISP = "0", string area = "0", int card = 0, string phone = null, int loop = 1)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
                 ErrMsg = "项目ID不能为空";
-                Result = string.Empty;
+                Result = null;
                 return false;
             }
 
             mHttpItem.URL = ApiHost + $"/api/yh_qh/id={id}&operator={ISP}&Region={area}&card={card}&phone={phone}&loop={loop}&token={Token}";
 
             List<string> ResultHtml = Http.GetHtml(mHttpItem).Html.Split('|').ToList();
+          
             try
             {
 
                 if (ResultHtml[0].Trim().Equals("0"))
                 {
                     ErrMsg = ResultHtml[1].Trim();
-                    Result = string.Empty;
+                    Result = null;
                     return false;
                 }
                 else
                 {
-                    Result = ResultHtml[1].Trim();
+                    ResultHtml.Remove(ResultHtml[0]);
+                    Result = ResultHtml;
                     return true;
                 }
             }
@@ -167,7 +169,7 @@ namespace SMSBase.Base
             {
 
                 ErrMsg = "函数GetPhone出错";
-                Result = string.Empty;
+                Result = null;
                 return false;
             }
         }

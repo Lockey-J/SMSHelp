@@ -36,13 +36,14 @@ namespace SMSBase.Interface
         /// 获取手机号码
         /// </summary>
         /// <param name="id">项目ID</param>
+        /// <param name="Result">返回手机号列表</param>
         /// <param name="ISP">运营商</param>
         /// <param name="area">地区</param>
         /// <param name="card">虚拟：1或实卡：2</param>
         /// <param name="phone">指定手机号</param>
         /// <param name="loop">过滤已做过号码 过滤：1 不过滤：2</param>
         /// <returns>返回手机号码</returns>
-        bool GetPhone(string id, out string Result, string ISP= "0", string area="0", int card= 0, string phone = null, int loop = 1);
+        bool GetPhone(string id, out List<string> Result, string ISP= "0", string area="0", int card= 0, string phone = null, int loop = 1);
 
         /// <summary>
         /// 获取验证码
