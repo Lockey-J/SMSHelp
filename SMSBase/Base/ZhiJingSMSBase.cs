@@ -1,21 +1,21 @@
-﻿using SMSBase.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HttpNetHelper;
+using SMSBase.Interface;
 namespace SMSBase.Base
 {
     /// <summary>
-    /// 爱码验证码平台
+    /// 致敬验证码平台
     /// </summary>
-    public class AiMaSMSBase : ISMSInterface
+    public class ZhiJingSMSBase : ISMSInterface
     {
         private readonly HttpItem mHttpItem;
         private readonly HttpHelper Http;
-        private readonly string ApiHost = "http://115.231.8.180:8000";
-        public AiMaSMSBase()
+        private readonly string ApiHost = "http://api.myzjxl.com:8080";
+        public ZhiJingSMSBase()
         {
             mHttpItem = new HttpItem()
             {
@@ -46,14 +46,14 @@ namespace SMSBase.Base
         /// <returns>是否成功</returns>
         public bool AddBlackPhone(string id, string phone)
         {
-            if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(phone) )
+            if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(phone))
             {
                 ErrMsg = "项目ID不能为空或接收手机号为空";
 
                 return false;
             }
 
-            mHttpItem.URL = ApiHost + $"/api/yh_lh/id={id}&phone={phone}&token={Token}";
+            mHttpItem.URL = ApiHost + $"/Addblack/?id={id}&phone={phone}&token={Token}";
 
             List<string> ResultHtml = Http.GetHtml(mHttpItem).Html.Split('|').ToList();
             try
@@ -95,7 +95,7 @@ namespace SMSBase.Base
                 return false;
             }
 
-            mHttpItem.URL = ApiHost + $"/api/yh_sf/id={id}&phone={phone}&token={Token}";
+            mHttpItem.URL = ApiHost + $"/Cancel/?id={id}&phone={phone}&token={Token}";
 
             List<string> ResultHtml = Http.GetHtml(mHttpItem).Html.Split('|').ToList();
             try
@@ -141,7 +141,7 @@ namespace SMSBase.Base
                 return false;
             }
 
-            mHttpItem.URL = ApiHost + $"/api/yh_qh/id={id}&operator={ISP}&Region={area}&card={card}&phone={phone}&loop={loop}&token={Token}";
+            mHttpItem.URL = ApiHost + $"/GetPhone/?id={id}&isp={ISP}&area={area}&card={card}&phone={phone}&loop={loop}&token={Token}";
 
             List<string> ResultHtml = Http.GetHtml(mHttpItem).Html.Split('|').ToList();
             try
@@ -176,14 +176,14 @@ namespace SMSBase.Base
         /// <returns>短信内容</returns>
         public bool GetPhoneMsg(string id, string phone, out string Result, string author = "")
         {
-            if (string.IsNullOrWhiteSpace(id)||string.IsNullOrWhiteSpace(phone))
+            if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(phone))
             {
                 ErrMsg = "项目ID不能为空或接收手机号为空";
                 Result = string.Empty;
                 return false;
             }
 
-            mHttpItem.URL = ApiHost + $"/api/yh_qm/id={id}&phone={phone}&t={author}&token={Token}";
+            mHttpItem.URL = ApiHost + $"/GetMsg/?id={id}&phone={phone}&dev={author}&token={Token}";
 
             List<string> ResultHtml = Http.GetHtml(mHttpItem).Html.Split('|').ToList();
             try
@@ -224,7 +224,7 @@ namespace SMSBase.Base
                 return false;
             }
             // string mUrl = string.Format(ApiHost + "/api/yh_gx/token={0}",Token);
-            mHttpItem.URL = ApiHost + $"/api/yh_gx/token={Token}";
+            mHttpItem.URL = ApiHost + $"/Balance/?token={Token}";
             List<string> ResultHtml = Http.GetHtml(mHttpItem).Html.Split('|').ToList();
             try
             {
@@ -241,13 +241,13 @@ namespace SMSBase.Base
                     return false;
                 }
             }
-            catch 
+            catch
             {
                 ResultInfo = null;
                 ErrMsg = "函数GetUserBalance出错";
                 return false;
             }
-        
+
         }
         /// <summary>
         /// 登录账户
@@ -263,7 +263,7 @@ namespace SMSBase.Base
                 return false;
             }
 
-            mHttpItem.URL = ApiHost + $"/api/sign/username={username}&password={password}";
+            mHttpItem.URL = ApiHost + $"/Login/?username={username}&password={password}";
 
             List<string> ResultHtml = Http.GetHtml(mHttpItem).Html.Split('|').ToList();
 
@@ -280,12 +280,12 @@ namespace SMSBase.Base
                     return true;
                 }
             }
-            catch 
+            catch
             {
                 ErrMsg = "函数Login出错";
                 return false;
             }
- 
+
         }
         /// <summary>
         /// 发送短信
@@ -300,11 +300,11 @@ namespace SMSBase.Base
             if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(sendPhone) || string.IsNullOrWhiteSpace(content))
             {
                 ErrMsg = "项目ID不能为空或接收手机号为空或发送对方为空号码及内容";
-               
+
                 return false;
             }
 
-            mHttpItem.URL = ApiHost + $"/api/fdx_tj/id={id}&phone={phone}&send={sendPhone}&content={content}&token={Token}";
+            mHttpItem.URL = ApiHost + $"/Sendmsg/?id={id}&phone={phone}&send={sendPhone}&content={content}&token={Token}";
 
             List<string> ResultHtml = Http.GetHtml(mHttpItem).Html.Split('|').ToList();
             try
@@ -313,12 +313,12 @@ namespace SMSBase.Base
                 if (ResultHtml[0].Trim().Equals("0"))
                 {
                     ErrMsg = ResultHtml[1].Trim();
-                  
+
                     return false;
                 }
                 else
                 {
-                    
+
                     return true;
                 }
             }
@@ -326,7 +326,7 @@ namespace SMSBase.Base
             {
 
                 ErrMsg = "函数SendMsg出错";
-                
+
                 return false;
             }
         }

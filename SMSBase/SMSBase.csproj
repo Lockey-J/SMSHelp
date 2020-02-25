@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\AiMaSMSBase.cs" />
+    <Compile Include="Base\ZhiJingSMSBase.cs" />
     <Compile Include="Interface\ISMSInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

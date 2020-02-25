@@ -19,7 +19,7 @@ namespace SMSHelp
 
         private void button1_Click(object sender, EventArgs e)
         {                       
-            var clsaima = new AiMaSMSBase();
+            var clsaima = new ZhiJingSMSBase();
             Console.WriteLine(clsaima.Login("lin01ok","6565810ok"));
             Console.WriteLine(clsaima.Token);
             Console.WriteLine(clsaima.GetPhoneMsg("21472","13556489648",out string aa));
