@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -124,6 +125,11 @@ namespace SMSBase.Base
 
                 return false;
             }
+        }
+
+        public bool GetPayImg( int PayCount, out Image PayImg)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

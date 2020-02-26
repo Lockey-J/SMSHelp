@@ -19,10 +19,13 @@ namespace SMSHelp
 
         private void button1_Click(object sender, EventArgs e)
         {                       
-            var clsaima = new ZhiJingSMSBase();
-            Console.WriteLine(clsaima.Login("lin01ok","6565810ok"));
+            var clsaima = new AiMaSMSBase();
+
+            Console.WriteLine(clsaima.Login("",""));
             Console.WriteLine(clsaima.Token);
             Console.WriteLine(clsaima.GetPhoneMsg("21472","13556489648",out string aa));
+            Console.WriteLine(clsaima.GetPayImg(10, out Image twm));
+            pictureBox1.Image = twm;
             Console.WriteLine(clsaima.ErrMsg);
         }
     }

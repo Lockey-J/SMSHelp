@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HttpNetHelper;
+using System.Drawing;
+
 namespace SMSBase.Base
 {
     /// <summary>
@@ -15,6 +17,7 @@ namespace SMSBase.Base
         private readonly HttpItem mHttpItem;
         private readonly HttpHelper Http;
         private readonly string ApiHost = "http://115.231.8.180:8000";
+        private readonly string ApiHostPro = "http://115.231.8.180:";
         public AiMaSMSBase()
         {
             mHttpItem = new HttpItem()
@@ -124,6 +127,34 @@ namespace SMSBase.Base
 
                 return false;
             }
+        }
+        /// <summary>
+        /// 获取支付宝充值二维码
+        /// </summary>
+        /// <param name="PayCount">充值金额</param>
+        /// <param name="PayImg">返回支付宝二维码</param>
+        /// <returns>是否获取到验证码</returns>
+        public bool GetPayImg( int PayCount, out Image PayImg)
+        { 
+            if (PayCount < 10)
+            {
+                ErrMsg = "最少充值金额为10元";
+                PayImg = null;
+                return false;
+            }
+            mHttpItem.URL = ApiHostPro + $"16899/api/sc/token={Token}&j={PayCount}";
+            Image AlipayImg = Http.GetImage(mHttpItem);
+            if (AlipayImg.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Bmp)){
+                PayImg = AlipayImg;
+                return true;
+            }
+            else
+            {
+                ErrMsg = "获取二维码错误";
+                PayImg = null;
+                return false;
+            }
+
         }
 
         /// <summary>

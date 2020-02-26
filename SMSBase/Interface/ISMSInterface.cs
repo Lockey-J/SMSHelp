@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Drawing;
 namespace SMSBase.Interface
 {
     interface ISMSInterface
@@ -25,7 +25,13 @@ namespace SMSBase.Interface
         /// <param name="password">密码</param>
         /// <returns></returns>
         bool Login(string username, string password);
-
+        /// <summary>
+        /// 获取支付宝充值二维码
+        /// </summary>
+        /// <param name="PayCount">充值金额</param>
+        /// <param name="PayImg">返回支付宝二维码</param>
+        /// <returns>是否获取到验证码</returns>
+        bool GetPayImg(int PayCount, out Image PayImg);
         /// <summary>
         /// 查询用户余额
         /// </summary>
