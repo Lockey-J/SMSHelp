@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LockHelper;
 using SMSBase.Base;
 namespace SMSHelp
 {
@@ -27,6 +28,10 @@ namespace SMSHelp
             Console.WriteLine(clsaima.GetPayImg(10, out Image twm));
             pictureBox1.Image = twm;
             Console.WriteLine(clsaima.ErrMsg);
+            using (UsingLock.UsLock().Read())
+            {
+
+            }
         }
     }
 }
