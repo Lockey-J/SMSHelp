@@ -20,7 +20,7 @@ namespace SMSHelp
 
         private void button1_Click(object sender, EventArgs e)
         {                       
-            var clsaima = new AiMaSMSBase();
+            var clsaima = new KaoLaMaBase();
 
             Console.WriteLine(clsaima.Login("",""));
             Console.WriteLine(clsaima.Token);
