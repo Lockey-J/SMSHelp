@@ -6,7 +6,7 @@ namespace LockHelper
 
     /// <summary> 使用using代替lock操作的对象,可指定写入和读取锁定模式
     /// </summary>
-    public sealed class UsingLock
+    public sealed class ClsLock
     {
         #region 内部类
 
@@ -70,16 +70,16 @@ namespace LockHelper
         /// <summary> 读写锁
         /// </summary>
         private readonly ReaderWriterLockSlim _LockSlim = new ReaderWriterLockSlim();
-        private static readonly UsingLock MusingLock = new UsingLock();
+        private static readonly ClsLock MusingLock = new ClsLock();
       
-        public static UsingLock UsLock()
+        public static ClsLock UsLock()
         {
             return MusingLock;
         }
         /// <summary> 使用using代替lock操作的对象,可指定写入和读取锁定模式
         /// <para>构造函数</para>
         /// </summary>
-        private UsingLock()
+        private ClsLock()
         {
             Enabled = true;
         }

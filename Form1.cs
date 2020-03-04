@@ -28,7 +28,7 @@ namespace SMSHelp
             Console.WriteLine(clsaima.GetPayImg(10, out Image twm));
             pictureBox1.Image = twm;
             Console.WriteLine(clsaima.ErrMsg);
-            using (UsingLock.UsLock().Read())
+            using (ClsLock.UsLock().Read())
             {
 
             }
